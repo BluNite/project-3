@@ -1,5 +1,7 @@
 import React from "react";
-import Events from "../components/Events";
+import EventList from "../components/EventList";
+import Cart from "../components/Cart";
+import CategoryMenu from "../components/CategoryMenu"
 import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -15,10 +17,13 @@ const useStyles = makeStyles((theme) => ({
 const Home = () => {
   const classes = useStyles()
   return (
-    <Container className={classes.root}>
-      <Events/>
-    </Container>
-
+    <div className="container" >      
+      <Container className={classes.root}>         
+        <EventList />
+        <CategoryMenu/>
+      </Container> 
+      <Cart />
+    </div>
   );
 };
 
