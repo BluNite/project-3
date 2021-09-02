@@ -3,7 +3,7 @@ import EventItem from '../EventItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { UPDATE_EVENTS } from '../../utils/actions';
 import { useQuery } from '@apollo/client';
-import { QUERY_EVENTS } from '../../utils/queries';
+import { QUERY_EVENTS, } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
 import spinner from '../../assets/spinner.gif';
 
