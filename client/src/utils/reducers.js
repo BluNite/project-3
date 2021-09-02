@@ -1,5 +1,5 @@
 import {
-  UPDATE_PRODUCTS,
+  UPDATE_EVENTS,
   ADD_TO_CART,
   UPDATE_CART_QUANTITY,
   REMOVE_FROM_CART,
@@ -11,7 +11,7 @@ import {
 } from "./actions";
 
 const initialState = {
-  products: [],
+  event: [],
   categories: [],
   currentCategory: '',
   cart: [],
@@ -20,40 +20,40 @@ const initialState = {
 
 export const reducers = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_PRODUCTS:
+    case UPDATE_EVENTS:
       return {
         ...state,
-        products: [...action.products],
+        pevent: [...action.event],
       };
 
     case ADD_TO_CART:
       return {
         ...state,
         cartOpen: true,
-        cart: [...state.cart, action.product],
+        cart: [...state.cart, action.event],
       };
 
     case ADD_MULTIPLE_TO_CART:
       return {
         ...state,
-        cart: [...state.cart, ...action.products],
+        cart: [...state.cart, ...action.event],
       };
 
     case UPDATE_CART_QUANTITY:
       return {
         ...state,
         cartOpen: true,
-        cart: state.cart.map(product => {
-          if (action._id === product._id) {
-            product.purchaseQuantity = action.purchaseQuantity
+        cart: state.cart.map(event => {
+          if (action._id === event._id) {
+            event.purchaseQuantity = action.purchaseQuantity
           }
-          return product
+          return event
         })
       };
 
     case REMOVE_FROM_CART:
-      let newState = state.cart.filter(product => {
-        return product._id !== action._id;
+      let newState = state.cart.filter(event => {
+        return event._id !== action._id;
       });
 
       return {
