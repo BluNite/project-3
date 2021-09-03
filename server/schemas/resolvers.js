@@ -23,8 +23,8 @@ const resolvers = {
 
       return await Events.find(params).populate('category');
     },
-    event: async (parent, { _id }) => {
-      return await Events.findById(_id).populate('category');
+    getEvents: async (parent, { term }) => {
+      return ;
     },
     user: async (parent, args, context) => {
       if (context.user) {

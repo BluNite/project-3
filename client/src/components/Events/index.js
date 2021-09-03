@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { getEvents } from '../../utils/API'
+import { search } from '../../utils/API'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,11 +20,16 @@ const useStyles = makeStyles((theme) => ({
 // That way we don't have to define them all individually
 function Events(props) {
   const [eventState, setEventState] =useState([])
+
+  useEffect (() => {
+    getEvents()
+  },[])
   
-   function getEvents(){
-    const event = getEvents()
-    if (eventState.length === 0)
-    setEventState(event)
+   async function getEvents(){
+    const events = await search ('comedy')
+    // if (eventState.length === 0)
+    // setEventState(event)
+    console.log(events)
    }
 
   const classes = useStyles()
