@@ -8,27 +8,26 @@ const eventSchema = new Schema({
     required: true,
     trim: true
   },
-  description: {
+  url: {
     type: String
   },
-  image: {
+  _id: {
     type: String
   },
-  price: {
-    type: Number,
-    required: true,
-    min: 0.99
+  images: {
+    type: String
   },
-  quantity: {
-    type: Number,
-    min: 0,
-    default: 0
-  },
-  category: {
-    type: Schema.Types.ObjectId,
-    ref: 'Category',
-    required: true
-  }
+  // price_range: {
+  //   type: Number,
+  //   required: true,
+  //   min: 0.99
+  // },
+  // quantity: {
+  //   type: Number,
+  //   min: 0,
+  //   default: 0
+  // }
+
 });
 
 const Events = mongoose.model('Events', eventSchema);

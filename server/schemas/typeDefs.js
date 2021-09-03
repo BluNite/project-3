@@ -6,14 +6,19 @@ const typeDefs = gql`
     name: String
   }
 
+  type Image {
+    _id: String
+    name: String    
+    url: String
+  }
+
+
   type Event {
     _id: ID
     name: String
-    description: String
-    image: String
-    quantity: Int
-    price: Float
-    category: Category
+    url: String
+    price_range: Float
+    images: [Image]    
   }
 
   type Order {
@@ -45,7 +50,7 @@ const typeDefs = gql`
     user: User
     order(_id: ID!): Order
     checkout(event: [ID]!): Checkout
-    getEvents(term: String): [Event]
+    events(term: String): [Event]
   }
 
   type Mutation {

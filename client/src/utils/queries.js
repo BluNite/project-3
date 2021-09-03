@@ -1,18 +1,18 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_EVENTS = gql`
-  query getEvents($term: String) {
-    getEvents(term: $term){
+  query events($term: String) {
+    events(term: $term){
       _id
       name
-      description
-      price
-      quantity
-      image
-      category {
+      url
+      price_range
+      images {
+        name
+        url
         _id
+      }       
     }
-  }
   }
 `;
 
@@ -24,20 +24,6 @@ export const QUERY_CHECKOUT = gql`
   }
 `;
 
-// export const QUERY_ALL_EVENTS = gql`
-//   {
-//     event {
-//       _id
-//       name
-//       description
-//       price
-//       quantity
-//       category {
-//         name
-//       }
-//     }
-//   }
-// `;
 
 export const QUERY_CATEGORIES = gql`
   {

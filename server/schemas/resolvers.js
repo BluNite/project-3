@@ -24,17 +24,32 @@ const resolvers = {
 
       return await Events.find(params).populate('category');
     },
-    getEvents: async (parent, { term }) => {
-
+    events: async (parent, { term }) => {
+      
       const BASEURL = "http://app.ticketmaster.com/discovery/v2/events.json?";
       const APIKEY = process.env.REACT_APP_APIKEY;
 
       try {
-        const data = await axios.get(`${BASEURL}keyword=${term}&apikey=${APIKEY}&rating=pg`);
-        console.log(Object.keys(data.data._embedded.events[0]))
-        return []
+        const data = await axios.get(`${BASEURL}keyword=${term}&apikey=${APIKEY}&rating=pg`);        
+        const events = data.data._embedded.events.map(({name, id, url, images, price_range })=>{
+         
+          return{
+            name, 
+            id, 
+            url,
+            price_range,
+            images 
+            
+          }
+        })
+        
+        return events 
       }
-      catch (e) { console.log(e) }
+
+      catch (e) {
+      console.log(e)
+      throw (e)
+         throw new Error ("Sorry, please try again later") }
     },
 
     user: async (parent, args, context) => {
