@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.12.3",
+    "axios": "^0.21.1",
     "graphql": "^15.5.1"
   }
 }

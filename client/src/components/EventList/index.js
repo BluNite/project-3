@@ -14,25 +14,26 @@ function EventList() {
   const { currentCategory } = state;
 
   const { loading, data } = useQuery(QUERY_EVENTS);
+  if (data) console.log(data) 
 
-  useEffect(() => {
-    if (data) {
-      dispatch({
-        type: UPDATE_EVENTS,
-        event: data.event,
-      });
-      data.event.forEach((event) => {
-        idbPromise('event', 'put', event);
-      });
-    } else if (!loading) {
-      idbPromise('event', 'get').then((event) => {
-        dispatch({
-          type: UPDATE_EVENTS,
-          event: event,
-        });
-      });
-    }
-  }, [data, loading, dispatch]);
+  // useEffect(() => {
+  //   if (data) {
+  //     dispatch({
+  //       type: UPDATE_EVENTS,
+  //       event: data.event,
+  //     });
+  //     data.event.forEach((event) => {
+  //       idbPromise('event', 'put', event);
+  //     });
+  //   } else if (!loading) {
+  //     idbPromise('event', 'get').then((event) => {
+  //       dispatch({
+  //         type: UPDATE_EVENTS,
+  //         event: event,
+  //       });
+  //     });
+  //   }
+  // }, [data, loading, dispatch]);
 
   function filterEvents() {
     if (!currentCategory) {
