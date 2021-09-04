@@ -1,9 +1,10 @@
 # Title: NYC&DO
 
 ## Purpose
-As a(n): individual concerned with physical disability
-	I’d like to: search for comedy shows 
-	So I could: get information about entertainment which are accessible for handicapped people.
+As an avid comedy circuit fan and frequent NYC tourist, I would like the ability to find current and upcoming live performances in the city. 
+Additionally, out of those options, I would like to know which locations have accessibility features installed. 
+
+
 
 ## Instructions:
 
@@ -26,7 +27,6 @@ A web application that allows a handicapped person to search for comedy shows in
 - Redux
 - Express
 - GraphQL
-- Mern
 - React
 - Javascript
 - Material UI
