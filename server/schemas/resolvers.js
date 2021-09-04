@@ -2,6 +2,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Events, Category, Order } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+const axios = require("axios")
 
 const resolvers = {
   Query: {
@@ -23,9 +24,33 @@ const resolvers = {
 
       return await Events.find(params).populate('category');
     },
-    event: async (parent, { _id }) => {
-      return await Events.findById(_id).populate('category');
+    events: async (parent, { term }) => {
+      
+      const BASEURL = "http://app.ticketmaster.com/discovery/v2/events.json?";
+      const APIKEY = process.env.REACT_APP_APIKEY;
+
+      try {
+        const data = await axios.get(`${BASEURL}keyword=${term}&apikey=${APIKEY}&rating=pg`);        
+        const events = data.data._embedded.events.map(({name, id, url, images, price_range })=>{
+         
+          return{
+            name, 
+            id, 
+            url,
+            images 
+            
+          }
+        })
+        
+        return events 
+      }
+
+      catch (e) {
+      console.log(e)
+      throw (e)
+         throw new Error ("Sorry, please try again later") }
     },
+
     user: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({

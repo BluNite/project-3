@@ -4,51 +4,54 @@ import { pluralize } from '../../utils/helpers';
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from '../../utils/actions';
 import { idbPromise } from '../../utils/helpers';
+import { Card, Box, Typography, Button } from '@material-ui/core'
 
-function EventItem(item) {
+function EventItem(event) {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
 
-  const { image, name, _id, price, quantity } = item;
+  const { name, _id, url } = event;
 
   const { cart } = state;
 
   const addToCart = () => {
-    const itemInCart = cart.find((cartItem) => cartItem._id === _id);
-    if (itemInCart) {
+    const eventInCart = cart.find((event) => event._id === _id);
+    if (eventInCart) {
       dispatch({
         type: UPDATE_CART_QUANTITY,
-        _id: _id,
-        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
+        name,
+        _id,
+        url,
+        purchaseQuantity: parseInt(eventInCart.purchaseQuantity) + 1,
       });
       idbPromise('cart', 'put', {
-        ...itemInCart,
-        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
+        ...eventInCart,
+        purchaseQuantity: parseInt(event.purchaseQuantity) + 1,
       });
     } else {
       dispatch({
         type: ADD_TO_CART,
-        event: { ...item, purchaseQuantity: 1 },
+        event: { ...event, purchaseQuantity: 1 },
       });
-      idbPromise('cart', 'put', { ...item, purchaseQuantity: 1 });
+      idbPromise('cart', 'put', { ...event, purchaseQuantity: 1 });
     }
   };
 
   return (
-    <div className="card px-1 py-1">
-      <Link to={`/event/${_id}`}>
-        <img alt={name} src={`/images/${image}`} />
-        <p>{name}</p>
-      </Link>
-      <div>
-        <div>
-          {quantity} {pluralize('item', quantity)} in stock
-        </div>
-        <span>${price}</span>
-      </div>
-      <button onClick={addToCart}>Add to cart</button>
-    </div>
+    <Box component={Card} margin={1} padding={1} display="flex">
+      <Typography variant={"h5"}>
+        {event.name}
+        </Typography> 
+        <Button variant="contained" color="primary" >👍Like</Button>     
+    </Box> 
+      
+     
   );
 }
+
+// {/* <Link to={`/event/${_id}`}>
+//         <img alt={name} src={`/images/${image}`} />
+//         <p>{name}</p>
+//       </Link> */}
 
 export default EventItem;

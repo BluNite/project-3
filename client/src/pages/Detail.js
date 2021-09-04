@@ -22,6 +22,7 @@ function Detail() {
   const [currentEvent, setCurrentEvent] = useState({});
 
   const { loading, data } = useQuery(QUERY_EVENTS);
+  
 
   const { event, cart } = state;
 

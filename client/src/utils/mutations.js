@@ -18,12 +18,13 @@ export const ADD_ORDER = gql`
       event {
         _id
         name
-        description
-        price
-        quantity
-        category {
+        url
+        price_range
+        images {
           name
-        }
+          url
+          _id
+        }       
       }
     }
   }

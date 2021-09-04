@@ -3,68 +3,51 @@ import EventItem from '../EventItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { UPDATE_EVENTS } from '../../utils/actions';
 import { useQuery } from '@apollo/client';
-import { QUERY_EVENTS } from '../../utils/queries';
+import { QUERY_EVENTS, } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
+import { Card, Container, Box, Button, Typography } from '@material-ui/core';
 import spinner from '../../assets/spinner.gif';
 
 function EventList() {
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state);
+ 
 
-  const { currentCategory } = state;
-
-  const { loading, data } = useQuery(QUERY_EVENTS);
-
-  useEffect(() => {
-    if (data) {
-      dispatch({
-        type: UPDATE_EVENTS,
-        event: data.event,
-      });
-      data.event.forEach((event) => {
-        idbPromise('event', 'put', event);
-      });
-    } else if (!loading) {
-      idbPromise('event', 'get').then((event) => {
-        dispatch({
-          type: UPDATE_EVENTS,
-          event: event,
-        });
-      });
-    }
-  }, [data, loading, dispatch]);
-
-  function filterEvents() {
-    if (!currentCategory) {
-      return state.event;
-    }
-
-    return state.pevent.filter(
-      (event) => event.category._id === currentCategory
-    );
-  }
-
+  const { loading, data, error } = useQuery(QUERY_EVENTS);
+  if (data) console.log(data) 
+  if (error) console.log(error) 
   return (
-    <div className="my-2">
-      <h2>Events:</h2>
-      {state.event.length ? (
+    <Box className="my-2">
+      <h3>Events:</h3>
+      {loading 
+        ? <div>Loading </div>
+        : data.events.map((event, i) =><EventItem
+        key={i}
+        _id={event._id}
+        name={event.name}
+        url={event.url}
+        
+      />)
+      } 
+
+
+      {/* {state.event.length ? (
         <div className="flex-row">
-          {filterEvents().map((event) => (
-            <EventItem
+          {filterEvents().map((event) => {
+            console.log(event)
+            return <EventItem
               key={event._id}
               _id={event._id}
               image={event.image}
               name={event.name}
-              price={event.price}
-              quantity={event.quantity}
+              price_range={event.price_range}
+              // quantity={event.quantity}
             />
-          ))}
+          })}
         </div>
       ) : (
-        <h3>You haven't added any events yet!</h3>
-      )}
+        <h3>You haven't searched any events yet!</h3>
+      )} */}
       {loading ? <img src={spinner} alt="loading" /> : null}
-    </div>
+    </Box>
   );
 }
 

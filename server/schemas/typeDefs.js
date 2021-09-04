@@ -6,20 +6,24 @@ const typeDefs = gql`
     name: String
   }
 
-  type Events {
+  type Image {
+    _id: String
+    name: String    
+    url: String
+  }
+
+
+  type Event {
     _id: ID
     name: String
-    description: String
-    image: String
-    quantity: Int
-    price: Float
-    category: Category
+    url: String
+    images: [Image]    
   }
 
   type Order {
     _id: ID
     purchaseDate: String
-    event: [Events]
+    event: [Event]
   }
 
   type User {
@@ -41,18 +45,18 @@ const typeDefs = gql`
 
   type Query {
     categories: [Category]
-    event(category: ID, name: String): [Events]
-    event(_id: ID!): Events
+    event(category: ID, name: String): [Event]
     user: User
     order(_id: ID!): Order
     checkout(event: [ID]!): Checkout
+    events(term: String): [Event]
   }
 
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     addOrder(event: [ID]!): Order
     updateUser(firstName: String, lastName: String, email: String, password: String): User
-    updateEvent(_id: ID!, quantity: Int!): Events
+    updateEvent(_id: ID!, quantity: Int!): Event
     login(email: String!, password: String!): Auth
   }
 `;
