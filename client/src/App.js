@@ -12,7 +12,7 @@ import { Provider } from 'react-redux';
 import store from './utils/store';
 
 import Home from './pages/Home';
-import Detail from './pages/Detail';
+import Detail from './pages/ShowDetail';
 import NoMatch from './pages/NoMatch';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -45,6 +45,7 @@ function App() {
       <Router>
         <div>
           <Provider store={store}>
+            <Nav />
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/login" component={Login} />
