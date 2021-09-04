@@ -10,16 +10,18 @@ function EventItem(event) {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
 
-  const { name, _id } = event;
+  const { name, _id, url } = event;
 
   const { cart } = state;
 
   const addToCart = () => {
-    const eventInCart = cart.find((cartItem) => cartItem._id === _id);
+    const eventInCart = cart.find((event) => event._id === _id);
     if (eventInCart) {
       dispatch({
         type: UPDATE_CART_QUANTITY,
-        _id: _id,
+        name,
+        _id,
+        url,
         purchaseQuantity: parseInt(eventInCart.purchaseQuantity) + 1,
       });
       idbPromise('cart', 'put', {
@@ -40,7 +42,7 @@ function EventItem(event) {
       <Typography variant={"h5"}>
         {event.name}
         </Typography> 
-        <Button variant="contained" color="primary" >Like</Button>     
+        <Button variant="contained" color="primary" >👍Like</Button>     
     </Box> 
       
      

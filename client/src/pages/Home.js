@@ -6,17 +6,19 @@ import CategoryMenu from "../components/CategoryMenu"
 import { Card, Container, Box, Button, Typography } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
+import SearchBar from "./SearchBar";
 
 
 
 const Home = () => {
   return (
     <div className="container" >            
-    <Box component={Card} margin={1} padding={1} display="flex">
-      <Login/>
+    <SearchBar/><Box component={Card} margin={1} padding={1} display="flex">
+       
+       <Login/>
     </Box>  
     <Box>
-      <EventList />       
+      <EventList/>      
     </Box> 
       <Cart />
     </div>  

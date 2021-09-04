@@ -45,7 +45,7 @@
 }
 
 .cart-closed:hover {
-  transform: rotate(8deg);
+  transform: rotate(30deg);
 }
 
 .cart img {
@@ -64,7 +64,7 @@
     position: relative;
     max-width: 100%;
     max-height: auto;
-    box-shadow: none;
+    box-shadow: rgb(7, 7, 7) ;
     background-color: inherit;
   }
 

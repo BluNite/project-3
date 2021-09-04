@@ -17,7 +17,6 @@ const typeDefs = gql`
     _id: ID
     name: String
     url: String
-    price_range: Float
     images: [Image]    
   }
 

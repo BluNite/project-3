@@ -37,7 +37,6 @@ const resolvers = {
             name, 
             id, 
             url,
-            price_range,
             images 
             
           }

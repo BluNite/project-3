@@ -5,6 +5,7 @@ import { UPDATE_EVENTS } from '../../utils/actions';
 import { useQuery } from '@apollo/client';
 import { QUERY_EVENTS, } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
+import { Card, Container, Box, Button, Typography } from '@material-ui/core';
 import spinner from '../../assets/spinner.gif';
 
 function EventList() {
@@ -14,14 +15,16 @@ function EventList() {
   if (data) console.log(data) 
   if (error) console.log(error) 
   return (
-    <div className="my-2">
-      <h2>Events:</h2>
+    <Box className="my-2">
+      <h3>Events:</h3>
       {loading 
         ? <div>Loading </div>
         : data.events.map((event, i) =><EventItem
         key={i}
         _id={event._id}
         name={event.name}
+        url={event.url}
+        
       />)
       } 
 
@@ -44,7 +47,7 @@ function EventList() {
         <h3>You haven't searched any events yet!</h3>
       )} */}
       {loading ? <img src={spinner} alt="loading" /> : null}
-    </div>
+    </Box>
   );
 }
 

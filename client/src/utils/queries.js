@@ -6,7 +6,6 @@ export const QUERY_EVENTS = gql`
       _id
       name
       url
-      price_range
       images {
         name
         url
